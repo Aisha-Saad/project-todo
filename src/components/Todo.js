@@ -28,6 +28,7 @@ export default function Todo({ todo, handelCheck }) {
 
   function handelDeleteClick() {
     SetshowDelete(true);
+
   }
   function handelUpdetClick() {
     SetshowUpdet(true);
@@ -41,7 +42,17 @@ export default function Todo({ todo, handelCheck }) {
   }
 
   function handelUpdetConfirm(){
-    alert("hello")
+    const updettedTodos =todos.map((t)=>{
+      if(t.id ===todo.id){
+        return  {...t ,title:showEdit.title ,details:showEdit.detials}
+      }else{
+        return t
+      }
+    })
+    setTodos(updettedTodos)
+    localStorage.setItem("todos", JSON.stringify(updettedTodos))
+
+    setShowEdit(false)
   }
 
   function hanelCloseConfirm() {
@@ -49,16 +60,21 @@ export default function Todo({ todo, handelCheck }) {
       return t.id !== todo.id;
     });
     setTodos(updettedTodos);
+    localStorage.setItem("todos", JSON.stringify(updettedTodos))
+
   }
   function handelCheckClick() {
-    const upgatedTodos = todos.map((t) => {
+    const updatedTodos = todos.map((t) => {
       if (t.id === todo.id) {
         t.Iscompleted = !t.Iscompleted;
       }
       return t;
     });
-    setTodos(upgatedTodos);
+    setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos))
+
   }
+
   return (
     <>
       {/* delete dialog */}
@@ -128,7 +144,7 @@ export default function Todo({ todo, handelCheck }) {
             variant="standard"
             value={showEdit.detials}
             onChange={(e)=>{
-              setShowEdit({...showEdit, detials: e.target.details})
+              setShowEdit({...showEdit, detials: e.target.value})
             }}
           />
         </DialogContent>

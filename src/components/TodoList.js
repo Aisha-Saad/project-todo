@@ -9,7 +9,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Unstable_Grid2';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 
 
@@ -51,10 +51,18 @@ export default function TodoList() {
       details:"",
       Iscompleted:false
     }
-
-    setTodos([...todos,NewTodos])
+    
+    const updetTodo=[...todos,NewTodos]
+    setTodos(updetTodo)
+    localStorage.setItem("todos", JSON.stringify(updetTodo))
     setInputTitle("")
   }
+
+  useEffect(()=>{
+    console.log("hey from local Storage");
+    const storgeTodo =JSON.parse(localStorage.getItem("todos"))
+    setTodos(storgeTodo)
+  },[])
   return (
   
       <Container maxWidth="sm">
