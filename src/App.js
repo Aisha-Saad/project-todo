@@ -11,6 +11,11 @@ function App() {
     typography: {
       fontFamily: ["A"],
     },
+    palette:{
+      primary:{
+        main:"#673ab7"
+      }
+    }
   });
   const initialtodos = [
     {

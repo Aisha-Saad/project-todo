@@ -159,7 +159,7 @@ export default function Todo({ todo, handelCheck }) {
         <CardContent className="card-main">
           <Grid container spacing={2}>
             <Grid xs={8}>
-              <Typography sx={{ fontSize: 22, textAlign: "right" }}>
+              <Typography sx={{ fontSize: 22, textAlign: "right" ,textDecoration:todo.Iscompleted?"line-through": "none"}}>
                 {todo.title}
               </Typography>
 
@@ -196,9 +196,9 @@ export default function Todo({ todo, handelCheck }) {
                   handelCheckClick();
                 }}
                 style={{
-                  border: "solid #415a77 1px",
-                  color: todo.Iscompleted ? "#ff006e" : "#023047",
-                  background: todo.Iscompleted ? "#003049" : "#ff006e",
+                  border: "solid #606c38  1px",
+                  color: todo.Iscompleted ? "#ca6702" : "#bbb",
+                  background: todo.Iscompleted ? "#ca6702" :"#fff",
                 }}
               >
                 <CheckIcon />

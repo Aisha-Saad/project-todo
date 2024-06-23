@@ -34,9 +34,6 @@ export default function TodoList() {
     setAlignment(newAlignment);
   };
 
-  const todosJSX = todos.map((t) => {
-    return <Todo key={t.id} todo={t} />;
-  });
 
 
   const complatedTodos=todos.filter((t)=>{
@@ -56,6 +53,12 @@ export default function TodoList() {
   }else{
     todosRender=todos
   }
+
+
+  const todosJSX = todosRender.map((t) => {
+    return <Todo key={t.id} todo={t} />;
+  });
+
   function handelAddclick() {
     const NewTodos = {
       id: uuidv4(),
@@ -72,7 +75,7 @@ export default function TodoList() {
 
   useEffect(() => {
     console.log("hey from local Storage");
-    const storgeTodo = JSON.parse(localStorage.getItem("todos"));
+    const storgeTodo = JSON.parse(localStorage.getItem("todos"))?? [];
     setTodos(storgeTodo);
   }, []);
 
@@ -85,7 +88,11 @@ export default function TodoList() {
 
   return (
     <Container maxWidth="sm">
-      <Card sx={{ minWidth: 275 }}>
+      <Card sx={{ minWidth: 275 }}
+      
+      style={{maxHeight:"80vh", overflow:"scroll"}}
+      
+      >
         <CardContent>
           <Typography
             sx={{ fontSize: 14 }}
@@ -107,6 +114,7 @@ export default function TodoList() {
             exclusive
             onChange={changeDisplay}
             aria-label="text alignment"
+            color="primary"
           >
           
           
@@ -153,6 +161,7 @@ export default function TodoList() {
                   handelAddclick();
                 }}
                 style={{ width: "100%", height: "100%" }}
+                disabled={inputTitle.length ===0}
               >
                 إضافة{" "}
               </Button>
