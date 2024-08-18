@@ -9,7 +9,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 //
 import Todo from "./Todo";
@@ -26,7 +26,7 @@ export default function TodoList() {
 
   const [inputTitle, setInputTitle] = useState("");
 
-  const [displayTodo, setdisplayTodo]=useState("all")
+  const [displayTodo, setdisplayTodo] = useState("all");
 
   const [alignment, setAlignment] = React.useState("left");
 
@@ -34,26 +34,34 @@ export default function TodoList() {
     setAlignment(newAlignment);
   };
 
+  const complatedTodos = useMemo(() => {
+    return todos.filter((t) => {
+      console.log("calling from complated")
+
+      return t.Iscompleted;
+    });
+  },[todos]);
 
 
-  const complatedTodos=todos.filter((t)=>{
-    return t.Iscompleted
-  })
-  const noncomplatedTodos=todos.filter((t)=>{
-    return !t.Iscompleted
-  })
+  const noncomplatedTodos = useMemo(()=>{
+    return todos.filter((t) => {
+      console.log("calling from Not complated")
+
+      return !t.Iscompleted;
+
+    });
+  },[todos])
 
 
-  let todosRender=todos
+  let todosRender = todos;
 
-  if(displayTodo ==="complet"){
-    todosRender=complatedTodos
-  }else if(displayTodo ==="non-complet"){
-    todosRender =noncomplatedTodos
-  }else{
-    todosRender=todos
+  if (displayTodo === "complet") {
+    todosRender = complatedTodos;
+  } else if (displayTodo === "non-complet") {
+    todosRender = noncomplatedTodos;
+  } else {
+    todosRender = todos;
   }
-
 
   const todosJSX = todosRender.map((t) => {
     return <Todo key={t.id} todo={t} />;
@@ -75,23 +83,19 @@ export default function TodoList() {
 
   useEffect(() => {
     console.log("hey from local Storage");
-    const storgeTodo = JSON.parse(localStorage.getItem("todos"))?? [];
+    const storgeTodo = JSON.parse(localStorage.getItem("todos")) ?? [];
     setTodos(storgeTodo);
   }, []);
 
-
- function changeDisplay(e){
-  setdisplayTodo(e.target.value)
- }
-
-
+  function changeDisplay(e) {
+    setdisplayTodo(e.target.value);
+  }
 
   return (
     <Container maxWidth="sm">
-      <Card sx={{ minWidth: 275 }}
-      
-      style={{maxHeight:"80vh", overflow:"scroll"}}
-      
+      <Card
+        sx={{ minWidth: 275 }}
+        style={{ maxHeight: "80vh", overflow: "scroll" }}
       >
         <CardContent>
           <Typography
@@ -116,8 +120,6 @@ export default function TodoList() {
             aria-label="text alignment"
             color="primary"
           >
-          
-          
             <ToggleButton value="non-complet" aria-label="right aligned">
               الغير منجزة
             </ToggleButton>
@@ -125,7 +127,6 @@ export default function TodoList() {
             <ToggleButton value="complet" aria-label="centered">
               المنجزة
             </ToggleButton>
-
 
             <ToggleButton value="all" aria-label="left aligned">
               الكل
@@ -161,7 +162,7 @@ export default function TodoList() {
                   handelAddclick();
                 }}
                 style={{ width: "100%", height: "100%" }}
-                disabled={inputTitle.length ===0}
+                disabled={inputTitle.length === 0}
               >
                 إضافة{" "}
               </Button>

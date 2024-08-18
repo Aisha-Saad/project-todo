@@ -8,6 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import { useContext, useState } from "react";
 import { TodosContext } from "../context/TodosContext";
+import {toastContext}from "../context/Toast"
 
 //Dialog
 
@@ -25,6 +26,7 @@ export default function Todo({ todo, handelCheck }) {
   const[showEdit,setShowEdit]=useState({title:"", detials:""})
 
   const { todos, setTodos } = useContext(TodosContext);
+  const { showhideToast } = useContext(toastContext);
 
   function handelDeleteClick() {
     SetshowDelete(true);
@@ -39,6 +41,7 @@ export default function Todo({ todo, handelCheck }) {
   }
   function handelCloseUpdet() {
     SetshowUpdet(false);
+    showhideToast()
   }
 
   function handelUpdetConfirm(){

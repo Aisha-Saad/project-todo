@@ -1,11 +1,23 @@
 import "./App.css";
 import TodoList from "./components/TodoList";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
+import { useState ,useContext} from "react";
+import {toastContext} from "./context/Toast"
 import { v4 as uuidv4 } from "uuid";
 
 
 import { TodosContext } from "./context/TodosContext";
+import Tosat from "./components/Toast";
+
+
+
+
+
+
+
+
+
+
 function App() {
   const theme = createTheme({
     typography: {
@@ -44,9 +56,25 @@ function App() {
     },
   ];
   const [todos, setTodos] = useState(initialtodos);
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  function showhideToast(){
+    setOpen(true)
+    setTimeout (()=>{
+      setOpen(false)
+    },2000)
+
+  }
   
   return (
+    
     <ThemeProvider theme={theme}>
+      <TodosContext.Provider value={{showhideToast}}>
+      
       <div
         className="App"
         style={{
@@ -58,10 +86,13 @@ function App() {
           direction: "rtl",
         }}
       >
+        <Tosat open={open}/>
         <TodosContext.Provider value={{ todos, setTodos }}>
           <TodoList />
-        </TodosContext.Provider>
+          </TodosContext.Provider>
+      
       </div>
+      </TodosContext.Provider>
     </ThemeProvider>
   );
 }
