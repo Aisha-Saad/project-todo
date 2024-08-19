@@ -7,7 +7,7 @@ import Alert from '@mui/material/Alert';
 import { useState } from 'react';
 
 
-export default function Tosat({open}) {
+export default function Tosat({open ,message}) {
 
   
   
@@ -42,7 +42,7 @@ export default function Tosat({open}) {
           variant="filled"
           sx={{ width: '100%' }}
         >
-          This is a success Alert inside a Snackbar!
+          {message}
         </Alert>
 
         </Snackbar>

@@ -9,7 +9,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo ,useContext } from "react";
 
 //
 import Todo from "./Todo";
@@ -17,7 +17,7 @@ import { v4 as uuidv4 } from "uuid";
 
 //
 import { TodosContext } from "../context/TodosContext";
-import { useContext } from "react";
+
 
 import { Margin, Padding } from "@mui/icons-material";
 
