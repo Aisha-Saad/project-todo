@@ -10,6 +10,8 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useState, useEffect, useMemo ,useContext } from "react";
+import {ToastContext}from "../context/ToastContext"
+
 
 //
 import Todo from "./Todo";
@@ -23,6 +25,8 @@ import { Margin, Padding } from "@mui/icons-material";
 
 export default function TodoList() {
   const { todos, setTodos } = useContext(TodosContext);
+  const { showhideToast } = useContext(ToastContext);
+
 
   const [inputTitle, setInputTitle] = useState("");
 

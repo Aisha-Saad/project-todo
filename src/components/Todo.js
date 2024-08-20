@@ -56,6 +56,7 @@ export default function Todo({ todo, handelCheck }) {
     localStorage.setItem("todos", JSON.stringify(updettedTodos))
 
     setShowEdit(false)
+    showhideToast("تمت التعديل بنجاح")
   }
 
   function hanelCloseConfirm() {
@@ -64,6 +65,7 @@ export default function Todo({ todo, handelCheck }) {
     });
     setTodos(updettedTodos);
     localStorage.setItem("todos", JSON.stringify(updettedTodos))
+    showhideToast("تمت الحذف بنجاح")
 
   }
   function handelCheckClick() {
@@ -141,7 +143,7 @@ export default function Todo({ todo, handelCheck }) {
           />
           <TextField
             autoFocus
-            required
+            
             margin="dense"
             id="name"
             label="التفاصيل"

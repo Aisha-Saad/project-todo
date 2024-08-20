@@ -29,7 +29,7 @@ export default function Tosat({open ,message}) {
     <div>
       
       <Snackbar
-      
+    
         open={open}
         autoHideDuration={6000}
 
@@ -37,7 +37,7 @@ export default function Tosat({open ,message}) {
         action={action}
       >
         <Alert
-  
+         style={{direction:"ltr"}}
           severity="success"
           variant="filled"
           sx={{ width: '100%' }}

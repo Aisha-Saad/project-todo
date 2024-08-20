@@ -5,9 +5,9 @@ import { useState, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { TodosContext } from "./context/TodosContext";
-import { ToastContext } from "./context/ToastContext";
+import { ToastProvider } from "./context/ToastContext";
 
-import MySnackBar from "./components/MySnackBar";
+
 
 function App() {
   const theme = createTheme({
@@ -47,24 +47,15 @@ function App() {
     },
   ];
   const [todos, setTodos] = useState(initialtodos);
-  const [open, setOpen] = useState(true);
-  const [message, setMessage] = useState(false);
 
-  const handleClick = () => {
-    setOpen(true);
-  };
 
-  function showhideToast(message) {
-    setOpen(true);
-    setMessage(message)
-    setTimeout(() => {
-      setOpen(false);
-    }, 2000);
-  }
+
+
+
 
   return (
     <ThemeProvider theme={theme}>
-      <ToastContext.Provider value={{ showhideToast }}>
+    <ToastProvider >
         <div
           className="App"
           style={{
@@ -76,12 +67,11 @@ function App() {
             direction: "rtl",
           }}
         >
-          <MySnackBar open={open} message={message} />
           <TodosContext.Provider value={{ todos, setTodos }}>
             <TodoList />
           </TodosContext.Provider>
         </div>
-      </ToastContext.Provider>
+        </ToastProvider>
     </ThemeProvider>
   );
 }
