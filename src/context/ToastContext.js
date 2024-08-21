@@ -1,15 +1,13 @@
-import { createContext ,useState} from "react";
+import { createContext ,useContext,useState} from "react";
 import MySnackBar from "../components/MySnackBar"
 export const ToastContext = createContext({});
 
 export const ToastProvider = ({ children }) => {
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(false);
 
-  const handleClick = () => {
-    setOpen(true);
-  };
+
   function showhideToast(message) {
     setOpen(true);
     setMessage(message)
@@ -29,3 +27,8 @@ export const ToastProvider = ({ children }) => {
     </ToastContext.Provider>
   );
 };
+
+
+export const useToast=()=>{
+   return useContext(ToastContext)
+}
